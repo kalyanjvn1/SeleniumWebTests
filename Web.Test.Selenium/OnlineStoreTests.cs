@@ -9,16 +9,35 @@ using Web.Test.Selenium.PageObjects;
 namespace Web.Test.Selenium
 {
     [TestFixture]
-    public class OnlineStoreTests
+    public class OnlineStoreTests : SeleniumTestBase
     {
-        [Test]
+        [Test(Description = "Submit an order for an Apple iPhone4s 16GB SIM-Free – Black")]
         public void SubmitOrder()
         {
-           string productCategoryTitle =  new HomePage().NavigateToHomePage()
-                          .SelectProductCategory();
-            Assert.AreEqual("Product Category | ONLINE STORE",productCategoryTitle,"Product Category Title did not match.");
+            string productName = "Apple iPhone 4S 16GB SIM-Free – Black";
+            new HomePage(this).EnterSearchTest("IPhone 4s");
+
+            new Phone(this).NavigateToIphone4sBlack()
+                           .VerifyProductName(productName)
+                            .NavigateToCheckOut();
+           
+
         }
 
+
+
+
+        [SetUp]
+        public override void TestSetUp()
+        {
+            IntialiseWebDriver();
+        }
+
+        [TearDown]
+        public override void TestCleanUp()
+        {
+            CleanUp();
+        }
                
 
     }

@@ -5,25 +5,29 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium.Support;
 using OpenQA.Selenium.Support.UI;
+using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace Web.Test.Selenium.PageObjects
 {
     public partial class HomePage
     {
         
-        public HomePage NavigateToHomePage()
-        {
-            WebDriver.Navigate().GoToUrl(this.BaseAddress);
-            WebDriver.Manage().Window.Maximize();
-            return this;
-        }
-
+        
         public string SelectProductCategory()
         {
             ProductCategoryMenu.Click();
-            WebDriverWait wait = new WebDriverWait(WebDriver, this.TimeOut);
+            WebDriverWait wait = new WebDriverWait(driver,controlTimeOut);
             wait.Until(ExpectedConditions.TitleContains("Product Category"));
-            return WebDriver.Title;
+            return driver.Title;
+        }
+
+        public HomePage EnterSearchTest(string product)
+        {
+            SearchTextBox.SendKeys(product);
+            SearchTextBox.SendKeys(Keys.Enter);
+            DoPageTransition();
+            return this;
         }
 
         
