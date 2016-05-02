@@ -18,7 +18,7 @@ namespace Web.Test.Selenium.PageObjects
         private readonly By addToCart = By.ClassName("wpsc_buy_button");
         private readonly By currentPrice = By.CssSelector(".currentprice.pricedisplay.product_price_96");
         private readonly By productName = By.ClassName("prodtitle");
-        private readonly By notificationPopup = By.Id("fancy_notification");
+        private readonly By notificationPopup = By.Id("fancy_notification_content");
         private readonly By checkOut = By.PartialLinkText("Go to Checkout");
         
 

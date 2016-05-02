@@ -22,6 +22,7 @@ namespace Web.Test.Selenium
             //WebDriver = new FirefoxDriver();
             WebDriver = new ChromeDriver();
             WebDriver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromMinutes(1));
+            WebDriver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(45));
             WebDriver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromMinutes(1));
             WebDriver.Navigate().GoToUrl(BaseAddress);
             WebDriver.Manage().Window.Maximize();
