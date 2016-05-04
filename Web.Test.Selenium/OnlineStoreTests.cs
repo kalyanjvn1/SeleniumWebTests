@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Web.Test.Selenium.PageObjects;
 
 namespace Web.Test.Selenium
@@ -15,13 +10,20 @@ namespace Web.Test.Selenium
         public void SubmitOrder()
         {
             string productName = "Apple iPhone 4S 16GB SIM-Free – Black";
+            string productNameAtCheckout = "Apple iPhone 4S 16GB SIM-Free - Black";
+            string quantity = "1";
+            string subTotalAtCheckout = "$270.00";
+            string totalAtCheckout = "$270.00";
+            string shippingFee = "$10.00";
+            string totalPrice = "$280.00";
             new HomePage(this).EnterSearchTest("IPhone 4s");
 
             new Phone(this).NavigateToIphone4sBlack()
                            .VerifyProductName(productName)
                             .NavigateToCheckOut();
-           
-
+            new CheckOut(this).VerifyProductQuantityAndTotalInCheckout(productNameAtCheckout, quantity, subTotalAtCheckout, totalAtCheckout)
+                              .EnterBillingDetails()
+                              .ReviewPurchaseItems(shippingFee, subTotalAtCheckout, totalPrice);                            
         }
 
 

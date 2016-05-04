@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
 
@@ -32,13 +27,16 @@ namespace Web.Test.Selenium.PageObjects
             return this;
         }
 
-        public void NavigateToCheckOut()
+        public Phone NavigateToCheckOut()
         {
+            string currentPriceInCart = CurrentPrice.Text;
             IWebElement element = driver.FindElement(By.ClassName("wpsc_buy_button"));
             AddToCartButton.Click();
             WebDriverWait wait = new WebDriverWait(driver, controlTimeOut);
             wait.Until((d) => driver.FindElement(notificationPopup).Displayed);
             CheckOutButton.Click();
+            DoPageTransition();
+            return this;
         }
     }
 }
